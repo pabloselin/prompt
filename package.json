@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "archetype-js": "^0.6.1",
+    "body-parser": "^1.18.3",
+    "co": "^4.6.0",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10",
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-player": "^1.8.0",
+    "superagent": "^4.1.0"
+  },
+  "scripts": {
+    "dev": "node .",
+    "build": "next build",
+    "start": "next start"
+  },
+  "name": "prompt",
+  "version": "0.0.1",
+  "description": "Visualizacion texto teatro",
+  "main": "index.js",
+  "author": "Pablo Selín Carrasco Armijo",
+  "license": "MIT",
+  "private": true
+}
