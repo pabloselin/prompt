@@ -23,7 +23,7 @@ class UnidadAccion extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if(prevProps.ids_assoc !== this.props.ids_assoc) {
+		if (prevProps.ids_assoc !== this.props.ids_assoc) {
 			this.fetchMaterial();
 		}
 	}
@@ -31,15 +31,19 @@ class UnidadAccion extends React.Component {
 	render() {
 		const materiales = this.state.material;
 		return (
-			<div>
+			<div className="unidadAccion">
 				{materiales &&
 					materiales.map(material => (
 						<div key={material._id}>
 							<Media tipo={material.tipo} data={material} />
 							<p>{this.props.data.texto}</p>
-							<p>{material.tipo}</p>
 						</div>
 					))}
+				<style jsx>{`
+					.unidadAccion {
+						text-align: center;
+					}
+				`}</style>
 			</div>
 		);
 	}
