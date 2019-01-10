@@ -128,8 +128,10 @@ class Main extends React.Component {
 
 						.accionNav {
 							width: 100%;
-							height: 140px;
+							height: 120px;
 							cursor: pointer;
+							position: fixed;
+							bottom: 0;
 						}
 
 						.accionNav span {

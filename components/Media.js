@@ -38,7 +38,7 @@ class Media extends React.Component {
 			ext = ".pdf";
 			component = Documento;
 		} else if (tipo === "Video") {
-			ext = ".mov";
+			ext = ".m4v";
 			component = Video;
 		} else if (tipo === "Audio") {
 			ext = ".mp3";

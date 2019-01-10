@@ -17,9 +17,15 @@ class UnidadAccion extends React.Component {
 	}
 
 	fetchMaterial() {
-		superagent
-			.get(API_URL + "/materiales_condicional/" + this.props.ids_assoc)
-			.then(res => this.setState({ material: res.body }));
+		if (this.props.ids_assoc) {
+			superagent
+				.get(
+					API_URL + "/materiales_condicional/" + this.props.ids_assoc
+				)
+				.then(res => this.setState({ material: res.body }));
+		} else {
+			this.setState({material: null});
+		}
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -36,9 +42,9 @@ class UnidadAccion extends React.Component {
 					materiales.map(material => (
 						<div key={material._id}>
 							<Media tipo={material.tipo} data={material} />
-							<p>{this.props.data.texto}</p>
 						</div>
 					))}
+					<p>{this.props.data.texto}</p>
 				<style jsx>{`
 					.unidadAccion {
 						text-align: center;
