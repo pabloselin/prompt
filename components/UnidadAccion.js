@@ -44,10 +44,14 @@ class UnidadAccion extends React.Component {
 							<Media tipo={material.tipo} data={material} />
 						</div>
 					))}
-					<p>{this.props.data.texto}</p>
+					<p className="texto">{this.props.data.texto}</p>
 				<style jsx>{`
 					.unidadAccion {
 						text-align: center;
+					}
+					.texto {
+						max-width: 600px;
+						margin: 12px auto;
 					}
 				`}</style>
 			</div>

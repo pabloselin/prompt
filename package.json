@@ -11,6 +11,7 @@
     "react-dom": "^16.7.0",
     "react-graceful-image": "^1.2.9",
     "react-player": "^1.8.0",
+    "slug": "^0.9.3",
     "superagent": "^4.1.0"
   },
   "scripts": {
