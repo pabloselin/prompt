@@ -13,7 +13,7 @@ class UnidadAccion extends React.Component {
 	}
 
 	fetchMaterial() {
-		let baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : process.env.BASE_URL;
+		let baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://evening-island-52944.herokuapp.com/';
 		if (this.props.ids_assoc) {
 			superagent
 				.get(
