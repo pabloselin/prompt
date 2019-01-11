@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const MONGO_URL = process.env.MONGO_URL;
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 co(function*() {
 	yield app.prepare();
