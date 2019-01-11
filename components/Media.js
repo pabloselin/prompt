@@ -5,9 +5,6 @@ import Documento from "./Documento";
 import Video from "./Video";
 import Audio from "./Audio";
 
-const { publicRuntimeConfig } = getConfig();
-const { API_URL, ASSETS_URL } = publicRuntimeConfig;
-
 class Media extends React.Component {
 	constructor(props) {
 		super(props);
@@ -45,7 +42,7 @@ class Media extends React.Component {
 			component = Audio;
 		}
 
-		let fileUrl = ASSETS_URL + filename + ext;
+		let fileUrl = 'http://staticprompt.apie.cl/material/' + filename + ext;
 
 		this.setState({ ext, fileUrl, component });
 	}

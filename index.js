@@ -11,11 +11,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-if (process.env.NODE_ENV !== 'production') {
-  	require('dotenv').load();
-}
-
-const MONGO_URL = process.env.MONGO_URL;
+const MONGO_URL = process.env.NODE_ENV === 'development' ? '': process.env.MONGO_URL;
 const PORT = process.env.PORT;
 
 co(function*() {

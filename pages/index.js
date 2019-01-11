@@ -1,12 +1,7 @@
 import React from "react";
 import * as superagent from "superagent";
-import getConfig from "next/config";
-
 import PromptMedia from "../components/PromptMedia";
 import PromptText from "../components/PromptText";
-
-const { publicRuntimeConfig } = getConfig();
-const { API_URL, ASSETS_URL } = publicRuntimeConfig;
 
 class Main extends React.Component {
 	static async getInitialProps({ req }) {
@@ -23,7 +18,7 @@ class Main extends React.Component {
 		}
 
 		const { actions } = await superagent
-			.get(API_URL + "/acciones_condicional")
+			.get(process.env.BASE_URL + "api/acciones_condicional")
 			.then(res => res.body);
 		return { actions };
 	}
@@ -87,13 +82,15 @@ class Main extends React.Component {
 				)}
 				<div className="switcher">
 					<span
-						className={`switch ${this.state.layout === 'texto' && 'active'}`}
+						className={`switch ${this.state.layout === "texto" &&
+							"active"}`}
 						onClick={this.switchLayout.bind(this, "texto")}
 					>
 						Texto
 					</span>
 					<span
-						className={`switch ${this.state.layout === 'media' && 'active'}`}
+						className={`switch ${this.state.layout === "media" &&
+							"active"}`}
 						onClick={this.switchLayout.bind(this, "media")}
 					>
 						Media
@@ -153,7 +150,8 @@ class Main extends React.Component {
 							font-family: sans-serif;
 							font-size: 13px;
 						}
-						.switch:hover, .switch.active {
+						.switch:hover,
+						.switch.active {
 							border-style: solid;
 							border-color: #333;
 						}

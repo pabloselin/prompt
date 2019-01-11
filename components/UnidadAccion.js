@@ -1,10 +1,6 @@
 import React from "react";
-import getConfig from "next/config";
 import * as superagent from "superagent";
 import Media from "./Media";
-
-const { publicRuntimeConfig } = getConfig();
-const { API_URL, ASSETS_URL } = publicRuntimeConfig;
 
 class UnidadAccion extends React.Component {
 	constructor(props) {
@@ -17,10 +13,11 @@ class UnidadAccion extends React.Component {
 	}
 
 	fetchMaterial() {
+		let baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : process.env.BASE_URL;
 		if (this.props.ids_assoc) {
 			superagent
 				.get(
-					API_URL + "/materiales_condicional/" + this.props.ids_assoc
+					baseurl + "api/materiales_condicional/" + this.props.ids_assoc
 				)
 				.then(res => this.setState({ material: res.body }));
 		} else {
