@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "node .",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "heroku-postbuild": "npm run build"
   },
   "name": "prompt",
   "version": "0.0.1",

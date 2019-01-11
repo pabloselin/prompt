@@ -34,6 +34,7 @@ class PromptText extends React.Component {
 						div.descripcion {
 							max-width: 600px;
 							margin: 12px auto;
+							font-style: italic;
 						}
 					`}
 				</style>

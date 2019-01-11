@@ -78,11 +78,11 @@ class Main extends React.Component {
 		const actionsLength = actions.length;
 		const hoveredAction = this.state.hoveredAction
 			? actions[this.state.hoveredAction]
-			: null;
+			: actions[this.state.currentAction];
 
 		return (
 			<div>
-				{this.state.hoveredAction && (
+				{hoveredAction && (
 					<div className="stateBar">{hoveredAction.texto}</div>
 				)}
 				<div className="switcher">
@@ -104,6 +104,7 @@ class Main extends React.Component {
 						<PromptMedia
 							action={actions[this.state.currentAction]}
 							actions={actions}
+							currentAction={this.state.currentAction}
 							clickAction={this.gotoAction}
 							hoverAction={this.hoverAction}
 							prevAction={this.prevAction}
@@ -136,6 +137,12 @@ class Main extends React.Component {
 							font-size: 120px;
 							color: #f0f0f0;
 							z-index: 1;
+						}
+						.switcher {
+							position: absolute;
+							top: 12px;
+							left: 12px;
+							z-index: 20;
 						}
 						.switch {
 							display: inline-block;

@@ -16,7 +16,7 @@ class PromptMedia extends React.Component {
 					{this.props.actions.map((action, key) => (
 						<span
 							className={`accionItem ${
-								this.props.action === key ? "active" : ""
+								this.props.currentAction === key ? "active" : ""
 							}`}
 							key={action._id}
 							onClick={() => this.props.clickAction(key)}
@@ -28,12 +28,6 @@ class PromptMedia extends React.Component {
 							<i />
 						</span>
 					))}
-					<div className="next" onClick={this.props.nextAction}>
-						&gt;
-					</div>
-					<div className="prev" onClick={this.props.prevAction}>
-						&lt;
-					</div>
 				</div>
 				<style jsx>
 					{`

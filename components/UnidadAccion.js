@@ -52,6 +52,7 @@ class UnidadAccion extends React.Component {
 					.texto {
 						max-width: 600px;
 						margin: 12px auto;
+						font-family: serif;
 					}
 				`}</style>
 			</div>
