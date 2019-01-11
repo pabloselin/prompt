@@ -12,7 +12,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const MONGO_URL = "mongodb://localhost:27017/local";
-const PORT = 3000;
+const PORT = 80;
 
 co(function*() {
 	yield app.prepare();
