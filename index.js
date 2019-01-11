@@ -11,8 +11,11 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-//const MONGO_URL = "mongodb://localhost:27017/local";
-const MONGO_URL = "mongodb://donhilo:atreyu1922@ds253804.mlab.com:53804/heroku_411gjs28";
+if (process.env.NODE_ENV !== 'production') {
+  	require('dotenv').load();
+}
+
+const MONGO_URL = process.env.MONGO_URL;
 const PORT = 3000;
 
 co(function*() {
