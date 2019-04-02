@@ -22,7 +22,7 @@ class Audio extends React.Component {
 							id="prompt_audio"
 							src={this.props.fileUrl}
 							autoPlay
-							crossorigin="anonymous"
+							crossOrigin="anonymous"
 						/>
 						<AudioSpectrum
 							id="audio-canvas"

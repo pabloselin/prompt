@@ -11,8 +11,9 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const MONGO_URL = process.env.NODE_ENV === 'development' ? 'mongodb://localhost:27017/local': process.env.MONGODB_URI;
-const PORT = process.env.NODE_ENV === 'development' ? 3000 : process.env.PORT;
+const MONGO_URL = process.env.NODE_ENV !== 'production' ? 'mongodb://localhost:27017/local': process.env.MONGODB_URI;
+console.log(process.env.NODE_ENV);
+const PORT = process.env.NODE_ENV !== 'production' ? 3000 : process.env.PORT;
 
 co(function*() {
 	yield app.prepare();

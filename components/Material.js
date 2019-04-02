@@ -2,7 +2,7 @@ import React from "react";
 import * as superagent from "superagent";
 import Media from "./Media";
 
-class UnidadAccion extends React.Component {
+class Material extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -34,16 +34,15 @@ class UnidadAccion extends React.Component {
 	render() {
 		const materiales = this.state.material;
 		return (
-			<div className="unidadAccion">
+			<div className="Material">
 				{materiales &&
 					materiales.map(material => (
 						<div key={material._id}>
 							<Media tipo={material.tipo} data={material} />
 						</div>
 					))}
-					<p className="texto">{this.props.data.texto}</p>
 				<style jsx>{`
-					.unidadAccion {
+					.Material {
 						text-align: center;
 					}
 					.texto {
@@ -57,4 +56,4 @@ class UnidadAccion extends React.Component {
 	}
 }
 
-export default UnidadAccion;
+export default Material;

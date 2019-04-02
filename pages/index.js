@@ -1,6 +1,6 @@
 import React from "react";
 import * as superagent from "superagent";
-import PromptMedia from "../components/PromptMedia";
+import HTMLHeader from "../components/HTMLHeader";
 import PromptText from "../components/PromptText";
 
 class Main extends React.Component {
@@ -28,7 +28,7 @@ class Main extends React.Component {
 		this.state = {
 			currentAction: 0,
 			hoveredAction: null,
-			layout: "media"
+			layout: "texto"
 		};
 
 		this.nextAction = this.nextAction.bind(this);
@@ -77,83 +77,15 @@ class Main extends React.Component {
 
 		return (
 			<div>
-				{hoveredAction && (
-					<div className="stateBar">{hoveredAction.texto}</div>
-				)}
-				<div className="switcher">
-					<span
-						className={`switch ${this.state.layout === "texto" &&
-							"active"}`}
-						onClick={this.switchLayout.bind(this, "texto")}
-					>
-						Texto
-					</span>
-					<span
-						className={`switch ${this.state.layout === "media" &&
-							"active"}`}
-						onClick={this.switchLayout.bind(this, "media")}
-					>
-						Media
-					</span>
-				</div>
+				<HTMLHeader />
 				<div id="container">
-					{this.state.layout === "media" ? (
-						<PromptMedia
-							action={actions[this.state.currentAction]}
-							actions={actions}
-							currentAction={this.state.currentAction}
-							clickAction={this.gotoAction}
-							hoverAction={this.hoverAction}
-							prevAction={this.prevAction}
-							nextAction={this.nextAction}
-						/>
-					) : (
-						<PromptText actions={actions} />
-					)}
+					<PromptText actions={actions} />
 				</div>
 				<style jsx>
 					{`
 						#container {
 							text-align: center;
-							position: absolute;
-							width: 100%;
-							z-index: 10;
-							padding: 0;
-							margin: 0;
 							font-family: sans-serif;
-						}
-						.stateBar {
-							text-align: center;
-							width: 100%;
-							height: 100%;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							position: fixed;
-							top: -60px;
-							left: 0;
-							font-size: 120px;
-							color: #f0f0f0;
-							z-index: 1;
-						}
-						.switcher {
-							position: absolute;
-							top: 12px;
-							left: 12px;
-							z-index: 20;
-						}
-						.switch {
-							display: inline-block;
-							padding: 3px 12px;
-							border: 1px dashed #ccc;
-							margin: 6px;
-							cursor: pointer;
-							font-family: sans-serif;
-							font-size: 13px;
-						}
-						.switch:hover,
-						.switch.active {
-							border-style: solid;
-							border-color: #333;
 						}
 					`}
 				</style>

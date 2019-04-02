@@ -3,9 +3,10 @@
 	[
 		{
 			"path": "."
-		},
-		{
-			"path": "/home/donhilo/Documentos/code/webassets/prompt/condicional"
 		}
-	]
+	],
+	"syntax_override":
+	{
+		"\\.js$": ["Babel", "JavaScript (Babel)"]
+	}
 }
