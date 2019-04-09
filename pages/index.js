@@ -1,7 +1,10 @@
 import React from "react";
 import * as superagent from "superagent";
 import HTMLHeader from "../components/HTMLHeader";
-import PromptText from "../components/PromptText";
+import SiteHeader from "../components/SiteHeader";
+import PromptMiniText from "../components/PromptMiniText";
+import PromptFullText from "../components/PromptFullText";
+import PromptMedia from "../components/PromptMedia";
 
 class Main extends React.Component {
 	static async getInitialProps({ req }) {
@@ -40,6 +43,16 @@ class Main extends React.Component {
 
 	componentDidMount() {}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.currentAction !== this.state.currentAction) {
+			this.scrollToAction();
+		}
+	}
+
+	scrollToAction = () => {
+		console.log("scrollto");
+	};
+
 	nextAction = () => {
 		if (this.state.currentAction < this.props.actions.length) {
 			this.setState({ currentAction: this.state.currentAction + 1 });
@@ -68,6 +81,13 @@ class Main extends React.Component {
 		});
 	};
 
+	activateAction = actionID => {
+		console.log(actionID);
+		this.setState({
+			currentAction: actionID
+		});
+	};
+
 	render() {
 		const actions = this.state.actions || this.props.actions;
 		const actionsLength = actions.length;
@@ -79,13 +99,58 @@ class Main extends React.Component {
 			<div>
 				<HTMLHeader />
 				<div id="container">
-					<PromptText actions={actions} />
+					<SiteHeader />
+					<div className="main-section">
+						<div className="column column-text-minimized">
+							<PromptMiniText
+								actions={actions}
+								activeID={this.state.currentAction}
+								clickProp={this.activateAction}
+							/>
+						</div>
+						<div className="column column-text-full">
+							<PromptFullText
+								actions={actions}
+								activeID={this.state.currentAction}
+							/>
+						</div>
+						<div
+							className="column column-media"
+							activeID={this.state.currentAction}
+						>
+							{" "}
+							Media
+						</div>
+						<PromptMedia activeId={this.state.currentAction} />
+					</div>
 				</div>
 				<style jsx>
 					{`
 						#container {
 							text-align: center;
 							font-family: sans-serif;
+							height: 100vh;
+							overflow: hidden;
+							display: flex;
+							position: relative;
+							width: 100%;
+							backface-visibility: hidden;
+							will-change: overflow;
+						}
+						.main-section {
+							display: flex;
+							margin-top: 140px;
+						}
+						.column {
+							flex-grow: 1;
+							max-width: 33%;
+							overflow: auto;
+							scrollbar-width: 0;
+							-ms-overflow-style: none; // IE 10+
+							scrollbar-width: none; // Firefox
+						}
+						.column::-webkit-scrollbar {
+							display: none;
 						}
 					`}
 				</style>

@@ -49,55 +49,24 @@ class PromptText extends React.Component {
 	render() {
 		return (
 			<div>
-				<div className="infoBar">
-					{Object.keys(colors).map((color, key) => (
-						<div
-							key={key}
-							className={`colorLegend ${color} ${this.state
-								.activeType === color && "active"}`}
-							onClick={this.activateType.bind(this, color)}
-						>
-							{color}
-						</div>
-					))}
-				</div>
+				
 				<div className="textBar">
 					{this.props.actions.map(action => (
 						<TextUnit
 							key={action._id}
+							id={action._id}
 							active={
-								this.state.actionId === action._id
+								this.props.activeID === action._id
 									? true
 									: false
 							}
 							type={this.unitType(action.tipo)}
 							textLength={this.unitLength(action.texto)}
-							click={this.activateAction.bind(this, action)}
+							clickProp={this.props.clickProp}
 						/>
 					))}
 				</div>
-				<div className="actionZone">
-					{this.props.actions.map((action, key) => (
-						<div
-							key={key}
-							onClick={this.activateMedia.bind(
-								this,
-								action.ids_assoc
-							)}
-							className={`unit ${action.ids_assoc && "wc"}`}
-							title={action._id}
-							data-type={action.tipo}
-							data-ids-assoc={action.ids_assoc}
-						>
-							<p>{action.texto}</p>
-						</div>
-					))}
-				</div>
-				<div className="materialZone">
-					{this.state.activeMedia && (
-						<Material ids_assoc={this.state.activeMedia} />
-					)}
-				</div>
+				
 				<style jsx>
 					{`
 						div {
@@ -107,9 +76,8 @@ class PromptText extends React.Component {
 							font-family: sans-serif;
 						}
 						.textBar {
-							float: left;
-							width: 200px;
-							margin-top: 60px;
+							margin-top: 12px;
+							padding: 12px 32px;
 						}
 						.colorLegend {
 							padding: 3px;
@@ -156,26 +124,7 @@ class PromptText extends React.Component {
 						.monologo {
 							background-color: ${colors.monologo};
 						}
-						.actionZone {
-							position: fixed;
-							left: 220px;
-							top: 60px;
-							width: 400px;
-							height: 600px;
-							overflow-y: scroll;
-							padding: 12px;
-							background-color: #f0f0f0;
-						}
-						.actionZone p {
-							text-align: justify;
-						}
-						.infoBar {
-							position: fixed;
-							left: 6px;
-							top: 12px;
-							z-index: 10;
-							background-color: white;
-						}
+						
 						.tipo {
 							font-weight: normal;
 							font-size: 10px;
@@ -184,18 +133,6 @@ class PromptText extends React.Component {
 							bottom: 0;
 							color: #ccc;
 							text-transform: uppercase;
-						}
-						.materialZone {
-							width: 300px;
-							position: fixed;
-							left: 700px;
-						}
-
-						.materialZone img,
-						.materialZone video,
-						.materialZone audio {
-							max-width: 100%;
-							height: auto;
 						}
 					`}
 				</style>

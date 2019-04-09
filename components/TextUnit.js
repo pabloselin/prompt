@@ -26,7 +26,6 @@ class TextUnit extends React.Component {
 		let rest = lines >= 1 ? lines % parseInt(lines) : lines;
 
 		this.setState({
-		
 			length: length,
 			lines: lines,
 			rest: rest
@@ -47,9 +46,13 @@ class TextUnit extends React.Component {
 		return paragraph;
 	}
 
+	click = () => {
+		this.props.clickProp(this.props.id);
+	} 
+
 	render() {
 		return (
-			<div className={`textUnit ${this.props.active && 'active'}`} onClick={this.props.click}>
+			<div className={`textUnit ${this.props.active && 'active'}`} onClick={this.click}>
 				<div className={this.props.type}>
 				{this.state.lines && this.linespans(this.state.lines)}
 				</div>

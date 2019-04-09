@@ -9,3 +9,13 @@ notas Prompt
 - Archivo histórico acotado
 - Acción pensada en el contexto de las visitas (interfaz digital humana) - dos o tres oradores, con un tablet
 - Qué cosas se pueden hacer, proponer distintas acciones, etc.
+
+---
+
+## Technical Challenges
+
+Backend
+
+- Optimize images and put some different sizes
+- Optimize videos
+- Make some administration stuff

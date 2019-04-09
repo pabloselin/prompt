@@ -42,7 +42,7 @@ class Media extends React.Component {
 			component = Audio;
 		}
 
-		let fileUrl = 'http://staticprompt.apie.cl/material/' + filename + ext;
+		let fileUrl = "http://staticprompt.apie.cl/material/" + filename + ext;
 
 		this.setState({ ext, fileUrl, component });
 	}
@@ -52,8 +52,28 @@ class Media extends React.Component {
 		return (
 			<div>
 				{Component !== null && (
-					<Component fileUrl={this.state.fileUrl} title={this.state.ext} />
+					<div>
+						<Component
+							fileUrl={this.state.fileUrl}
+							title={this.state.ext}
+						/>
+						<ul className="materialdata">
+							<li>{this.props.data.cat}</li>
+							<li>{this.props.data.tipo}</li>
+							<li>{this.props.data.fecha}</li>
+							<li>{this.props.data.desc}</li>
+							<li>{this.props.data.longdesc}</li>
+						</ul>
+					</div>
 				)}
+				<style jsx>{`
+					.materialdata {
+						margin: 0;
+						padding: 0;
+						list-style: none;
+						text-align: left;
+					}
+				`}</style>
 			</div>
 		);
 	}
