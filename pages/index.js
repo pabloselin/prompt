@@ -14,7 +14,7 @@ class Main extends React.Component {
 				.db()
 				.collection("acciones_condicional")
 				.find({})
-				.sort({ orden: 1 })
+				.sort({ uaccion: 1 })
 				.collation({ locale: "en_US", numericOrdering: true })
 				.toArray();
 
@@ -52,6 +52,12 @@ class Main extends React.Component {
 			.then(res => this.setState({ materiales: res.body }));
 		this.setState({
 			materiales: this.props.materiales
+		});
+		let acciones = superagent
+			.get(process.env.BASE_URL + "api/acciones_condicional")
+			.then(res => this.setState({ acciones: res.body }));
+		this.setState({
+			acciones: this.props.acciones
 		});
 	}
 
