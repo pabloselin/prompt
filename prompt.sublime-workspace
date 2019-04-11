@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Scroll",
+				"ScrollElement"
+			],
+			[
 				"active",
 				"activeMedia"
 			],
@@ -420,8 +424,12 @@
 		"selected_items":
 		[
 			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
 				"prett",
-				"JsPrettier: Format Code"
+				"Preferences: JsPrettier Settings - Default"
 			],
 			[
 				"ren",
@@ -446,10 +454,6 @@
 			[
 				"syjs",
 				"Set Syntax: JavaScript"
-			],
-			[
-				"comm",
-				"Toggle Comment"
 			],
 			[
 				"pret",
@@ -599,19 +603,29 @@
 	],
 	"file_history":
 	[
-		"/home/donhilo/Code/js/prompt/index.js",
+		"/home/donhilo/Code/js/prompt/components/HTMLHeader.js",
+		"/home/donhilo/Code/js/prompt/components/ScrollView.js",
+		"/home/donhilo/Code/js/prompt/components/PromptFullText.js",
+		"/home/donhilo/Code/js/prompt/components/Line.js",
+		"/home/donhilo/Code/js/prompt/components/TextUnit.js",
+		"/home/donhilo/Code/js/prompt/components/PromptMiniText.js",
+		"/home/donhilo/.config/sublime-text-3/Packages/JsPrettier/JsPrettier.sublime-settings",
+		"/home/donhilo/.config/sublime-text-3/Packages/User/JsPrettier.sublime-settings",
 		"/home/donhilo/Code/js/prompt/components/Imagen.js",
+		"/home/donhilo/Code/js/prompt/components/Media.js",
+		"/home/donhilo/Code/js/prompt/pages/contenidos.js",
+		"/home/donhilo/Code/js/prompt/components/PromptMedia.js",
+		"/home/donhilo/Code/js/prompt/pages/index.js",
+		"/home/donhilo/Code/js/prompt/components/SiteHeader.js",
+		"/home/donhilo/Code/js/prompt/assets/minireset.css",
+		"/home/donhilo/Code/js/prompt/index.js",
 		"/tmp/fz3temp-2/.htaccess",
 		"/home/donhilo/Code/js/prompt/components/Audio.js",
-		"/home/donhilo/Code/js/prompt/components/Media.js",
 		"/home/donhilo/Code/js/prompt/components/Material.js",
 		"/home/donhilo/Code/js/prompt/components/PromptText.js",
 		"/home/donhilo/Code/js/prompt/notas_reu_22.md",
 		"/home/donhilo/Code/js/prompt/prompt.sublime-project",
 		"/home/donhilo/Code/js/prompt/lib/api.js",
-		"/home/donhilo/Code/js/prompt/pages/index.js",
-		"/home/donhilo/Code/js/prompt/pages/contenidos.js",
-		"/home/donhilo/Code/js/prompt/components/PromptMedia.js",
 		"/home/donhilo/Escritorio/notas/trjmama.txt",
 		"/home/donhilo/Escritorio/notas/notas_prompt.md",
 		"/home/donhilo/Escritorio/notas/germina_210119.md",
@@ -716,17 +730,7 @@
 		"/home/donhilo/Documentos/code/js/filsa2018-frontend/public/manifest.json",
 		"/home/donhilo/Documentos/code/js/filsa2018-frontend/faviconDescription.json",
 		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/NotFound.js",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/FastLinks.js",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/Footer.js",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/MobileMenuItems.js",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/README.md",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/utils/api.js",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/utils/env.js",
-		"/home/donhilo/Escritorio/sites.xml",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/GrupoColaborador.js",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/IosPwa.js",
-		"/home/donhilo/Documentos/code/php/cchl/phpdocker/php-fpm/Dockerfile",
-		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/MenuMobile.js"
+		"/home/donhilo/Documentos/code/js/filsa2018-frontend/src/components/FastLinks.js"
 	],
 	"find":
 	{
@@ -836,6 +840,26 @@
 		"selected_items":
 		[
 			[
+				"lin",
+				"components/Line.js"
+			],
+			[
+				"full",
+				"components/PromptFullText.js"
+			],
+			[
+				"med",
+				"components/Media.js"
+			],
+			[
+				"textu",
+				"components/TextUnit.js"
+			],
+			[
+				"htmlh",
+				"components/HTMLHeader.js"
+			],
+			[
 				"audi",
 				"components/Audio.js"
 			],
@@ -870,10 +894,6 @@
 			[
 				"pack",
 				"prompt/package.json"
-			],
-			[
-				"med",
-				"prompt/components/Media.js"
 			],
 			[
 				"vid",
@@ -1330,22 +1350,6 @@
 			[
 				"menut",
 				"filsa2018-frontend/src/components/MenuTop.js"
-			],
-			[
-				"fastlin",
-				"filsa2018-frontend/src/components/FastLinks.js"
-			],
-			[
-				"mob",
-				"filsa2018-frontend/src/components/MobileMenuItems.js"
-			],
-			[
-				"servi",
-				"filsa2018-frontend/src/registerServiceWorker.js"
-			],
-			[
-				"invitados",
-				"filsa2018-frontend/src/components/Invitados.js"
 			]
 		],
 		"width": 0.0

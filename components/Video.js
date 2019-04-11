@@ -4,26 +4,35 @@ import ReactPlayer from "react-player";
 class Video extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			mounted: false
-		};
 	}
 
-	componentDidMount() {
-		this.setState({ mounted: true });
-	}
+	click = () => {
+		//console.log(this.props.id);
+		this.props.mountMedia(this.props.id);
+	};
 
 	render() {
 		return (
-			<div>
-				{this.state.mounted && (
+			<div className="videoWrapper">
+				{this.props.active ? (
 					<ReactPlayer
-						style={{ margin: "0 auto" }}
+						width="100%"
 						url={this.props.fileUrl}
-						playing={true}
-						showControls={true}
+						playing={false}
+						controls={true}
 					/>
+				) : (
+					<div className="videoPlaceholder" onClick={this.click}>
+						Video: {this.props.title}
+					</div>
 				)}
+				<style jsx>{`
+					.videoWrapper {
+						padding: 12px;
+						margin-bottom: 12px;
+						border: 1px dashed #ccc;
+					}
+				`}</style>
 			</div>
 		);
 	}

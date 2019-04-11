@@ -1,7 +1,10 @@
 import React from "react";
+import { findDOMNode } from "react-dom";
 import slug from "slug";
+import scrollIntoView from "scroll-into-view";
 import TextUnit from "./TextUnit";
 import Material from "./Material";
+import ScrollView, { ScrollElement } from "./ScrollView";
 import colors from "../lib/colors";
 
 class PromptFullText extends React.Component {
@@ -46,28 +49,48 @@ class PromptFullText extends React.Component {
 		});
 	}
 
+	componentDidMount() {
+		// console.log(this.texts);
+	}
+
+	scrollTo(name) {
+		this._scroller.scrollTo(name);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.activeID !== this.props.activeID) {
+			this.scrollTo(this.props.activeID);
+		}
+	}
+
 	render() {
 		return (
-			<div>	
+			<div>
 				<div className="actionZone">
-					{this.props.actions.map((action, key) => (
-						<div
-							id={action._id}
-							key={key}
-							onClick={this.activateMedia.bind(
-								this,
-								action.ids_assoc
-							)}
-							className={`unit ${action.ids_assoc && "wc"} ${action._id === this.props.activeID && "active"}`}
-							title={action._id}
-							data-type={action.tipo}
-							data-ids-assoc={action.ids_assoc}
-						>
-							<p>{action.texto}</p>
+					<ScrollView ref={scroller => (this._scroller = scroller)}>
+						<div className="scroller">
+							{this.props.actions.map((action, key) => (
+								<ScrollElement key={key} name={action._id}>
+									<div
+										onClick={this.activateMedia.bind(
+											this,
+											action.ids_assoc
+										)}
+										className={`unit ${action.ids_assoc &&
+											"wc"} ${action._id ===
+											this.props.activeID && "active"}`}
+										title={action._id}
+										data-type={action.tipo}
+										data-ids-assoc={action.ids_assoc}
+									>
+										<p>{action.texto}</p>
+									</div>
+								</ScrollElement>
+							))}
 						</div>
-					))}
+					</ScrollView>
 				</div>
-				
+
 				<style jsx>
 					{`
 						div {
@@ -88,26 +111,7 @@ class PromptFullText extends React.Component {
 							background-color: #333;
 							color: white;
 						}
-						
 
-						.acotacion {
-							background-color: ${colors.acotacion};
-						}
-						.descripcion {
-							background-color: ${colors.descripcion};
-						}
-						.cancion {
-							background-color: ${colors.cancion};
-						}
-						.dialogo {
-							background-color: ${colors.dialogo};
-						}
-						.letra {
-							background-color: ${colors.letra};
-						}
-						.monologo {
-							background-color: ${colors.monologo};
-						}
 						.actionZone p {
 							text-align: justify;
 						}

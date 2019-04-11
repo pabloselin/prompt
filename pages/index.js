@@ -17,79 +17,63 @@ class Main extends React.Component {
 				.sort({ orden: 1 })
 				.collation({ locale: "en_US", numericOrdering: true })
 				.toArray();
-			return { actions };
-		}
 
-		const { actions } = await superagent
-			.get(process.env.BASE_URL + "api/acciones_condicional")
-			.then(res => res.body);
-		return { actions };
+			const materiales = await db
+				.db()
+				.collection("materiales_condicional")
+				.find({})
+				.sort({ orden: 1 })
+				.collation({ locale: "en_US", numericOrdering: true })
+				.toArray();
+
+			return { actions, materiales };
+		}
 	}
 
 	constructor() {
 		super();
 		this.state = {
 			currentAction: 0,
+			currentAssoc: null,
 			hoveredAction: null,
-			layout: "texto"
+			layout: "texto",
+			columnText: false,
+			columnMini: false,
+			columnMedia: false,
+			playing: false,
+			materiales: null
 		};
-
-		this.nextAction = this.nextAction.bind(this);
-		this.prevAction = this.prevAction.bind(this);
-		this.gotoAction = this.gotoAction.bind(this);
-		this.hoverAction = this.hoverAction.bind(this);
-		this.switchLayout = this.switchLayout.bind(this);
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+		let materiales = superagent
+			.get(process.env.BASE_URL + "api/materiales_condicional")
+			.then(res => this.setState({ materiales: res.body }));
+		this.setState({
+			materiales: this.props.materiales
+		});
+	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (prevState.currentAction !== this.state.currentAction) {
-			this.scrollToAction();
+		if (prevState.currentAssoc !== this.state.currentAssoc) {
+			this.setState({
+				materiales: this.props.materiales.filter(
+					material => material.id === this.state.currentAssoc
+				)
+			});
 		}
 	}
 
-	scrollToAction = () => {
-		console.log("scrollto");
-	};
-
-	nextAction = () => {
-		if (this.state.currentAction < this.props.actions.length) {
-			this.setState({ currentAction: this.state.currentAction + 1 });
-		}
-	};
-
-	prevAction = () => {
-		if (this.state.currentAction > 0) {
-			this.setState({ currentAction: this.state.currentAction - 1 });
-		}
-	};
-
-	gotoAction = actionPosition => {
-		this.setState({ currentAction: actionPosition });
-	};
-
-	hoverAction = actionPosition => {
+	activateAction = (actionID, assocID) => {
 		this.setState({
-			hoveredAction: actionPosition
-		});
-	};
-
-	switchLayout = layout => {
-		this.setState({
-			layout: layout
-		});
-	};
-
-	activateAction = actionID => {
-		console.log(actionID);
-		this.setState({
-			currentAction: actionID
+			currentAction: actionID,
+			currentAssoc: assocID
 		});
 	};
 
 	render() {
 		const actions = this.state.actions || this.props.actions;
+		const materiales = this.state.materiales || this.props.materiales;
 		const actionsLength = actions.length;
 		const hoveredAction = this.state.hoveredAction
 			? actions[this.state.hoveredAction]
@@ -118,10 +102,13 @@ class Main extends React.Component {
 							className="column column-media"
 							activeID={this.state.currentAction}
 						>
-							{" "}
-							Media
+							<PromptMedia
+								activeId={this.state.currentAction}
+								materiales={this.state.materiales}
+								assoc={this.state.currentAssoc}
+								playing={this.state.playing}
+							/>
 						</div>
-						<PromptMedia activeId={this.state.currentAction} />
 					</div>
 				</div>
 				<style jsx>

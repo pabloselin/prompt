@@ -11,7 +11,16 @@ class PromptText extends React.Component {
 			action: null,
 			actionId: 0,
 			activeType: null,
-			activeMedia: null
+			activeMedia: null,
+			actions: this.props.actions,
+			types: [
+				"Acotación",
+				"Descripción",
+				"Canción",
+				"Diálogo",
+				"Monólogo",
+				"Letra"
+			]
 		};
 		this.activateAction = this.activateAction.bind(this);
 		this.activateType = this.activateType.bind(this);
@@ -40,18 +49,40 @@ class PromptText extends React.Component {
 		});
 	}
 
-	activateType(type) {
+	activateType = type => {
 		this.setState({
 			activeType: type
 		});
+	};
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.activeType !== this.state.activeType) {
+			this.setState({
+				actions: this.props.actions.filter(
+					action => action.tipo === this.state.activeType
+				)
+			});
+		}
 	}
 
 	render() {
 		return (
 			<div>
-				
+				<div className="textFilter">
+					{this.state.types.map(type => (
+						<div
+							className={`squareFilter ${slug(type, {
+								lower: true
+							})} ${this.state.activeType === type && "active"}`}
+							onClick={() => this.activateType(type)}
+							title={type}
+						>
+							{type}
+						</div>
+					))}
+				</div>
 				<div className="textBar">
-					{this.props.actions.map(action => (
+					{this.state.actions.map(action => (
 						<TextUnit
 							key={action._id}
 							id={action._id}
@@ -63,10 +94,11 @@ class PromptText extends React.Component {
 							type={this.unitType(action.tipo)}
 							textLength={this.unitLength(action.texto)}
 							clickProp={this.props.clickProp}
+							assoc={action.ids_assoc}
 						/>
 					))}
 				</div>
-				
+
 				<style jsx>
 					{`
 						div {
@@ -75,6 +107,25 @@ class PromptText extends React.Component {
 							line-height: 1.4em;
 							font-family: sans-serif;
 						}
+						.textFilter {
+							display: flex;
+						}
+						.squareFilter {
+							width: 100px;
+							height: 40px;
+							font-size: 9px;
+							text-transform: lowercase;
+							padding: 3px;
+							color: white;
+							cursor: pointer;
+							transition: all ease-in 0.3s;
+						}
+
+						.squareFilter.active,
+						.squareFilter:hover {
+							padding-top: 20px;
+						}
+
 						.textBar {
 							margin-top: 12px;
 							padding: 12px 32px;
@@ -124,7 +175,7 @@ class PromptText extends React.Component {
 						.monologo {
 							background-color: ${colors.monologo};
 						}
-						
+
 						.tipo {
 							font-weight: normal;
 							font-size: 10px;

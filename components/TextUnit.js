@@ -22,7 +22,8 @@ class TextUnit extends React.Component {
 	}
 
 	componentDidMount() {
-		let lines = this.props.textLength / this.state.lineChars[this.props.type];
+		let lines =
+			this.props.textLength / this.state.lineChars[this.props.type];
 		let rest = lines >= 1 ? lines % parseInt(lines) : lines;
 
 		this.setState({
@@ -37,36 +38,62 @@ class TextUnit extends React.Component {
 		let intLines = parseInt(longLines);
 		let paragraph = [];
 		for (let i = 0; i < intLines; i++) {
-			if(i === intLines -1) {
-				paragraph.push(<Line key={i} width={this.state.rest} tipo={this.props.type} />);
+			if (i === intLines - 1) {
+				paragraph.push(
+					<Line
+						key={i}
+						width={this.state.rest}
+						tipo={this.props.type}
+					/>
+				);
 			} else {
-				paragraph.push(<Line key={i} width={1} tipo={this.props.type} />);
-			}	
+				paragraph.push(
+					<Line key={i} width={1} tipo={this.props.type} />
+				);
+			}
 		}
 		return paragraph;
 	}
 
 	click = () => {
-		this.props.clickProp(this.props.id);
-	} 
+		this.props.clickProp(this.props.id, this.props.assoc);
+	};
 
 	render() {
 		return (
-			<div className={`textUnit ${this.props.active && 'active'}`} onClick={this.click}>
+			<div
+				className={`textUnit ${this.props.active && "active"} ${this
+					.props.assoc && "withMedia"}`}
+				onClick={this.click}
+			>
 				<div className={this.props.type}>
-				{this.state.lines && this.linespans(this.state.lines)}
+					{this.state.lines && this.linespans(this.state.lines)}
 				</div>
 				<style jsx>
 					{`
-						.dialogo, .monologo, .cancion, .letra, .acotacion {
+						.dialogo,
+						.monologo,
+						.cancion,
+						.letra,
+						.acotacion {
 							max-width: 55%;
 							margin: 0 auto;
 						}
+						.descripcion {
+							max-width: 70%;
+							margin: 0 auto;
+						}
+
+						.withMedia {
+							border-left: 4px solid red;
+						}
+
 						.textUnit {
 							margin-bottom: 12px;
 							opacity: 0.6;
 						}
-						.textUnit:hover, .textUnit.active {
+						.textUnit:hover,
+						.textUnit.active {
 							opacity: 1;
 						}
 					`}

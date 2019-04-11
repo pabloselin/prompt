@@ -52,19 +52,14 @@ class Media extends React.Component {
 		return (
 			<div>
 				{Component !== null && (
-					<div>
-						<Component
-							fileUrl={this.state.fileUrl}
-							title={this.state.ext}
-						/>
-						<ul className="materialdata">
-							<li>{this.props.data.cat}</li>
-							<li>{this.props.data.tipo}</li>
-							<li>{this.props.data.fecha}</li>
-							<li>{this.props.data.desc}</li>
-							<li>{this.props.data.longdesc}</li>
-						</ul>
-					</div>
+					<Component
+						fileUrl={this.state.fileUrl}
+						ext={this.state.ext}
+						title={this.props.data.desc}
+						mountMedia={this.props.mountMedia}
+						active={this.props.active}
+						id={this.props.data._id}
+					/>
 				)}
 				<style jsx>{`
 					.materialdata {
