@@ -33,13 +33,15 @@ class Audio extends React.Component {
 								]}
 								gap={4}
 							/>
-							<audio
-								id={`audio-${this.props.id}`}
-								src={this.props.fileUrl}
-								autoPlay
-								crossOrigin="anonymous"
-								controls
-							/>
+							<p>
+								<audio
+									id={`audio-${this.props.id}`}
+									src={this.props.fileUrl}
+									autoPlay
+									crossOrigin="anonymous"
+									controls
+								/>
+							</p>
 						</div>
 					) : (
 						<div className="audioPlaceholder" onClick={this.click}>

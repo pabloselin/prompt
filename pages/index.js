@@ -41,7 +41,8 @@ class Main extends React.Component {
 			columnMini: false,
 			columnMedia: false,
 			playing: false,
-			materiales: null
+			materiales: null,
+			mediaType: null
 		};
 	}
 
@@ -62,12 +63,25 @@ class Main extends React.Component {
 				)
 			});
 		}
+		if (prevState.mediaType !== this.state.mediaType) {
+			this.setState({
+				materiales: this.props.materiales.filter(
+					material => material.tipo === this.state.mediaType
+				)
+			});
+		}
 	}
 
 	activateAction = (actionID, assocID) => {
 		this.setState({
 			currentAction: actionID,
 			currentAssoc: assocID
+		});
+	};
+
+	setMediaType = type => {
+		this.setState({
+			mediaType: type
 		});
 	};
 
@@ -107,6 +121,8 @@ class Main extends React.Component {
 								materiales={this.state.materiales}
 								assoc={this.state.currentAssoc}
 								playing={this.state.playing}
+								activeType={this.state.mediaType}
+								setMediaType={this.setMediaType}
 							/>
 						</div>
 					</div>

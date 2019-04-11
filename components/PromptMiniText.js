@@ -12,6 +12,7 @@ class PromptText extends React.Component {
 			actionId: 0,
 			activeType: null,
 			activeMedia: null,
+			activeCharacter: null,
 			actions: this.props.actions,
 			types: [
 				"Acotación",
@@ -20,6 +21,15 @@ class PromptText extends React.Component {
 				"Diálogo",
 				"Monólogo",
 				"Letra"
+			],
+			personajes: [
+				"Esteban",
+				"Compañeros",
+				"Silvia",
+				"Voz en Off",
+				"Sergio",
+				"Carlitos",
+				"Maturana"
 			]
 		};
 		this.activateAction = this.activateAction.bind(this);
@@ -55,50 +65,102 @@ class PromptText extends React.Component {
 		});
 	};
 
+	activateCharacter = personaje => {
+		this.setState({
+			activeCharacter: personaje
+		});
+	};
+
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.activeType !== this.state.activeType) {
-			this.setState({
-				actions: this.props.actions.filter(
-					action => action.tipo === this.state.activeType
-				)
-			});
+			if (this.state.activeType === null) {
+				this.setState({
+					actions: this.props.actions
+				});
+			} else {
+				this.setState({
+					activeCharacter: null,
+					actions: this.props.actions.filter(
+						action => action.tipo === this.state.activeType
+					)
+				});
+			}
+		}
+		if (prevState.activeCharacter !== this.state.activeCharacter) {
+			if (this.state.activeCharacter !== null) {
+				this.setState({
+					activeType: null,
+					actions: this.props.actions.filter(action =>
+						action.personajes.includes(this.state.activeCharacter)
+					)
+				});
+			}
 		}
 	}
 
 	render() {
 		return (
 			<div>
-				<div className="textFilter">
-					{this.state.types.map(type => (
-						<div
-							className={`squareFilter ${slug(type, {
-								lower: true
-							})} ${this.state.activeType === type && "active"}`}
-							onClick={() => this.activateType(type)}
-							title={type}
-						>
-							{type}
+				<div className="toolsetWrap">
+					<div className="toolset">
+						<div className="textFilter">
+							<h2>Tipos de acción</h2>
+							{this.state.types.map(type => (
+								<div
+									className={`squareFilter ${slug(type, {
+										lower: true
+									})} ${this.state.activeType === type &&
+										"active"}`}
+									onClick={() => this.activateType(type)}
+									title={type}
+								>
+									{type}
+								</div>
+							))}
+							<div
+								className={`squareFilter todo ${this.state
+									.activeType === null && "active"}`}
+								onClick={() => this.activateType(null)}
+								title="Todo"
+							>
+								Todo
+							</div>
 						</div>
-					))}
-				</div>
-				<div className="textBar">
-					{this.state.actions.map(action => (
-						<TextUnit
-							key={action._id}
-							id={action._id}
-							active={
-								this.props.activeID === action._id
-									? true
-									: false
-							}
-							type={this.unitType(action.tipo)}
-							textLength={this.unitLength(action.texto)}
-							clickProp={this.props.clickProp}
-							assoc={action.ids_assoc}
-						/>
-					))}
-				</div>
 
+						<div className="characterFilter">
+							<h2>Personajes</h2>
+							{this.state.personajes.map(personaje => (
+								<div
+									className={`squarePersonaje ${this.state
+										.activeCharacter === personaje &&
+										"active"}`}
+									onClick={() =>
+										this.activateCharacter(personaje)
+									}
+								>
+									{personaje}
+								</div>
+							))}
+						</div>
+					</div>
+					<div className="textBar">
+						{this.state.actions.map(action => (
+							<TextUnit
+								key={action._id}
+								id={action._id}
+								active={
+									this.props.activeID === action._id
+										? true
+										: false
+								}
+								type={this.unitType(action.tipo)}
+								textLength={this.unitLength(action.texto)}
+								clickProp={this.props.clickProp}
+								assoc={action.ids_assoc}
+							/>
+						))}
+					</div>
+				</div>
 				<style jsx>
 					{`
 						div {
@@ -107,14 +169,45 @@ class PromptText extends React.Component {
 							line-height: 1.4em;
 							font-family: sans-serif;
 						}
-						.textFilter {
+
+						h2 {
+							font-size: 13px;
+							font-weight: normal;
+						}
+
+						.squarePersonaje {
+							height: 40px;
+							font-size: 11px;
+							padding: 3px;
+							border: 1px solid #333;
+							color: #333;
+							width: 100px;
+							text-align: center;
+							cursor: pointer;
+						}
+
+						.squarePersonaje.active,
+						.squarePersonaje:hover {
+							background-color: #ccc;
+						}
+
+						.toolsetWrap {
 							display: flex;
 						}
+
+						.toolset {
+							width: 126px;
+						}
+
+						.textBar {
+							width: 400px;
+						}
+
 						.squareFilter {
 							width: 100px;
 							height: 40px;
-							font-size: 9px;
-							text-transform: lowercase;
+							font-size: 11px;
+							text-transform: uppercase;
 							padding: 3px;
 							color: white;
 							cursor: pointer;
@@ -174,6 +267,9 @@ class PromptText extends React.Component {
 						}
 						.monologo {
 							background-color: ${colors.monologo};
+						}
+						.todo {
+							background-color: #333;
 						}
 
 						.tipo {

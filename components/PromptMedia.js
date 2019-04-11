@@ -7,20 +7,35 @@ class PromptMedia extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
-			activeID: null
+			activeID: null,
+			types: ["Fotografía", "Papelería", "Documentos", "Video", "Audio"],
+			activeType: "todos"
 		};
 	}
 
 	mountMedia = ID => {
-		console.log(ID);
 		this.setState({
 			activeID: ID
 		});
 	};
 
+	filterMediaType = type => {
+		this.props.setMediaType(type);
+	};
+
 	render() {
 		return (
 			<div>
+				<div className="materialType">
+					{this.state.types.map(type => (
+						<div
+							className="typeSquare"
+							onClick={() => this.filterMediaType(type)}
+						>
+							{type}
+						</div>
+					))}
+				</div>
 				<div className="mediaWrapper">
 					{this.props.materiales &&
 						this.props.materiales.map((material, key) => (
@@ -37,6 +52,23 @@ class PromptMedia extends React.Component {
 				<style jsx>{`
 					.mediaWrapper {
 						padding: 24px;
+					}
+
+					.materialType {
+						display: flex;
+						margin: 0 24px;
+					}
+
+					.typeSquare {
+						display: block;
+						font-size: 11px;
+						padding: 6px;
+						border: 1px solid #ccc;
+						cursor: pointer;
+					}
+
+					.typeSquare:hover {
+						background-color: #f0f0f0;
 					}
 				`}</style>
 			</div>
