@@ -7,22 +7,20 @@ class Line extends React.Component {
 
 		this.state = {
 			width: this.props.width * 100
-		}
+		};
 	}
 
-	componentDidMount() {
-		
-	}
+	componentDidMount() {}
 	render() {
 		return (
 			<div>
-				<span className={`${this.props.tipo} line`}/>
+				<span className={`${this.props.tipo} line`} />
 				<style jsx>{`
 					.line {
 						display: block;
 						background-color: #ccc;
 						width: ${this.state.width}%;
-						height: 6px;		
+						height: 6px;
 						margin-bottom: 2px;
 						border-radius: 3px;
 					}

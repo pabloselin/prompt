@@ -201,7 +201,7 @@ class PromptText extends React.Component {
 						.toolset {
 							width: 126px;
 							position: fixed;
-							top: 120px;
+							top: 132px;
 							left: 12px;
 							border-right: 1px dashed #ccc;
 						}
