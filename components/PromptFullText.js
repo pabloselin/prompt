@@ -78,7 +78,10 @@ class PromptFullText extends React.Component {
 										)}
 										className={`unit ${action.ids_assoc &&
 											"wc"} ${action._id ===
-											this.props.activeID && "active"}`}
+											this.props.activeID &&
+											"active"} ${slug(action.tipo, {
+											lower: true
+										})}`}
 										title={action._id}
 										data-type={action.tipo}
 										data-ids-assoc={action.ids_assoc}
@@ -110,6 +113,25 @@ class PromptFullText extends React.Component {
 						div.active {
 							background-color: #333;
 							color: white;
+						}
+
+						.active.acotacion {
+							background-color: ${colors.acotacion};
+						}
+						.active.descripcion {
+							background-color: ${colors.descripcion};
+						}
+						.active.cancion {
+							background-color: ${colors.cancion};
+						}
+						.active.dialogo {
+							background-color: ${colors.dialogo};
+						}
+						.active.letra {
+							background-color: ${colors.letra};
+						}
+						.active.monologo {
+							background-color: ${colors.monologo};
 						}
 
 						.actionZone p {
