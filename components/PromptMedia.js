@@ -8,7 +8,7 @@ class PromptMedia extends React.Component {
 		super();
 		this.state = {
 			activeID: null,
-			types: ["Fotografía", "Papelería", "Documentos", "Video", "Audio"],
+			types: ["Fotografía", "Papelería", "Video", "Audio"],
 			activeType: "todos"
 		};
 	}
@@ -27,8 +27,9 @@ class PromptMedia extends React.Component {
 		return (
 			<div>
 				<div className="materialType">
-					{this.state.types.map(type => (
+					{this.state.types.map((type, key) => (
 						<div
+							key={key}
 							className="typeSquare"
 							onClick={() => this.filterMediaType(type)}
 						>

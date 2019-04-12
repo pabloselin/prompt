@@ -171,12 +171,14 @@ class PromptText extends React.Component {
 						}
 
 						h2 {
-							font-size: 13px;
+							font-size: 11px;
 							font-weight: normal;
+							text-transform: uppercase;
+							color: #555;
 						}
 
 						.squarePersonaje {
-							height: 40px;
+							height: 20px;
 							font-size: 11px;
 							padding: 3px;
 							border: 1px solid #333;
@@ -184,6 +186,7 @@ class PromptText extends React.Component {
 							width: 100px;
 							text-align: center;
 							cursor: pointer;
+							margin-bottom: 6px;
 						}
 
 						.squarePersonaje.active,
@@ -197,21 +200,27 @@ class PromptText extends React.Component {
 
 						.toolset {
 							width: 126px;
+							position: fixed;
+							top: 120px;
+							left: 12px;
+							border-right: 1px dashed #ccc;
 						}
 
 						.textBar {
 							width: 400px;
+							margin-left: 130px;
 						}
 
 						.squareFilter {
 							width: 100px;
-							height: 40px;
+							height: 30px;
 							font-size: 11px;
 							text-transform: uppercase;
 							padding: 3px;
 							color: white;
 							cursor: pointer;
 							transition: all ease-in 0.3s;
+							margin-bottom: 6px;
 						}
 
 						.squareFilter.active,
