@@ -17,11 +17,16 @@ class Media extends React.Component {
 	}
 
 	componentDidMount() {
-		this.buildResourceUrl(this.props.data.id, this.props.tipo);
+		//this.buildResourceUrl(this.props.data.id, this.props.tipo);
+		//console.log(this.props);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.props.data.id !== prevProps.data.id) {
+		if (
+			this.props.data.id !== prevProps.data.id &&
+			this.props.tipo !== undefined
+		) {
+			console.log(this.props.data.id);
 			this.buildResourceUrl(this.props.data.id, this.props.tipo);
 		}
 	}
@@ -40,6 +45,8 @@ class Media extends React.Component {
 		} else if (tipo === "Audio") {
 			ext = ".mp3";
 			component = Audio;
+		} else {
+			component = Imagen;
 		}
 
 		let fileUrl = "http://staticprompt.apie.cl/material/" + filename + ext;

@@ -37,12 +37,19 @@ class PromptText extends React.Component {
 		this.activateMedia = this.activateMedia.bind(this);
 	}
 	unitLength(text) {
-		return text.length;
+		if (text) {
+			return text.length;
+		}
 	}
 
 	unitType(type) {
-		let newType = type.length > 0 ? slug(type, { lower: true }) : "default";
-		return newType;
+		if (type) {
+			let newType =
+				type.length > 0 ? slug(type, { lower: true }) : "default";
+			return newType;
+		} else {
+			return "acotacion";
+		}
 	}
 
 	activateAction(action) {

@@ -14,7 +14,7 @@ class Main extends React.Component {
 				.db()
 				.collection("acciones_condicional")
 				.find({})
-				.sort({ uaccion: 1 })
+				.sort({ orden: 1 })
 				.collation({ locale: "en_US", numericOrdering: true })
 				.toArray();
 
@@ -65,7 +65,8 @@ class Main extends React.Component {
 		if (prevState.currentAssoc !== this.state.currentAssoc) {
 			this.setState({
 				materiales: this.props.materiales.filter(
-					material => material.id === this.state.currentAssoc
+					material =>
+						this.state.currentAssoc.indexOf(material.id) !== -1
 				)
 			});
 		}
@@ -127,8 +128,6 @@ class Main extends React.Component {
 								materiales={this.state.materiales}
 								assoc={this.state.currentAssoc}
 								playing={this.state.playing}
-								activeType={this.state.mediaType}
-								setMediaType={this.setMediaType}
 							/>
 						</div>
 					</div>

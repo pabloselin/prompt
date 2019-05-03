@@ -13,15 +13,25 @@ class Material extends React.Component {
 	}
 
 	fetchMaterial() {
-		let baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://promptbook.herokuapp.com/';
+		let baseurl =
+			process.env.NODE_ENV === "development"
+				? "http://localhost:3000/"
+				: "https://promptbook.herokuapp.com/";
 		if (this.props.ids_assoc) {
-			superagent
-				.get(
-					baseurl + "api/materiales_condicional/" + this.props.ids_assoc
-				)
-				.then(res => this.setState({ material: res.body }));
+			let ids = ids_assoc.split(", ");
+			let materiales = [];
+			ids.map(item_assoc =>
+				superagent
+					.get(
+						baseurl +
+							"api/materiales_condicional/" +
+							this.props.ids_assoc
+					)
+					.then(res => materiales.push(res.body))
+			);
+			this.setState({ material: materiales });
 		} else {
-			this.setState({material: null});
+			this.setState({ material: null });
 		}
 	}
 
@@ -38,7 +48,7 @@ class Material extends React.Component {
 				{materiales &&
 					materiales.map(material => (
 						<div key={material._id}>
-							<Media tipo={material.tipo} data={material} />
+							<Media data={material} />
 						</div>
 					))}
 				<style jsx>{`
