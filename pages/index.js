@@ -5,7 +5,7 @@ import SiteHeader from "../components/SiteHeader";
 import PromptMiniText from "../components/PromptMiniText";
 import PromptFullText from "../components/PromptFullText";
 import PromptMedia from "../components/PromptMedia";
-
+//import logouc from "../assets/logouc.png";
 class Main extends React.Component {
 	static async getInitialProps({ req }) {
 		if (req) {
@@ -47,17 +47,21 @@ class Main extends React.Component {
 	}
 
 	componentDidMount() {
-		let materiales = superagent
-			.get(process.env.BASE_URL + "api/materiales_condicional")
-			.then(res => this.setState({ materiales: res.body }));
-		this.setState({
-			materiales: this.props.materiales
-		});
+		this.getMateriales();
 		let acciones = superagent
 			.get(process.env.BASE_URL + "api/acciones_condicional")
 			.then(res => this.setState({ acciones: res.body }));
 		this.setState({
 			acciones: this.props.acciones
+		});
+	}
+
+	getMateriales() {
+		let materiales = superagent
+			.get(process.env.BASE_URL + "api/materiales_condicional")
+			.then(res => this.setState({ materiales: res.body }));
+		this.setState({
+			materiales: this.props.materiales
 		});
 	}
 
@@ -128,9 +132,19 @@ class Main extends React.Component {
 								materiales={this.state.materiales}
 								assoc={this.state.currentAssoc}
 								playing={this.state.playing}
+								showingType={this.state.mediaType}
+								setMediaType={this.setMediaType}
 							/>
 						</div>
 					</div>
+				</div>
+				<div className="site-logo">
+					<img src="/static/logouc.png" alt="UC" />
+					<p>
+						Financiado por la Dirección de Artes y Cultura
+						<br />
+						Vicerrectoría de Investigación UC
+					</p>
 				</div>
 				<style jsx>
 					{`
@@ -159,6 +173,32 @@ class Main extends React.Component {
 						}
 						.column::-webkit-scrollbar {
 							display: none;
+						}
+						.site-logo {
+							background-color: #000;
+							max-width: 30%;
+							float: right;
+							position: fixed;
+							top: 0;
+							right: 0;
+							color: white;
+							padding: 12px;
+							text-align: right;
+							font-family: sans-serif;
+							font-size: 12px;
+							line-height: 100px;
+							vertical-align: middle;
+							z-index: 200;
+						}
+
+						.site-logo p {
+							line-height: 14px;
+						}
+
+						.site-logo img {
+							max-width: 100px;
+							float: left;
+							margin-right: 12px;
 						}
 					`}
 				</style>
